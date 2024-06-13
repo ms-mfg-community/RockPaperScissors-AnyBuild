@@ -1,0 +1,21 @@
+name: Create a UHMI Shell build
+
+on:
+  workflow_dispatch:
+  #push:
+
+jobs:
+  create-build:
+    uses: ra-standard/DevOps/.github/workflows/create-any-build.yml@main
+    strategy:
+      matrix:
+        # **************************** Add the Solution Files to Build to the Array Below ****************************
+        # Solution filename must be unique within the repository
+        solution_filename: [RockPaperScissors-1.sln]
+        # ************************************************************************************************************
+    with:
+      repository_name: ${{ github.event.repository.name }}
+      branch_name: ${{ github.ref_name }}
+      solution_filename: ${{ matrix.solution_filename }}
+    secrets:
+      token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
